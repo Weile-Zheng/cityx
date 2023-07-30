@@ -1,0 +1,19 @@
+#!/bin/bash 
+welcomeMessage(){
+  echo "Welcome ----------"
+  if [ ! -d ~/cityx/profile ]; then 
+    setUp 
+  fi
+
+  python3 ~/exe/bin/cityx/main.py
+    
+}
+
+setUp(){
+   mkdir ~/cityx/profile
+   mkdir ~/cityx/profile/guideList
+   mkdir ~/cityx/settings
+   mkdir ~/cityx/userFiles
+   python3 ~/exe/bin/cityx/setup.py
+}
+welcomeMessage
