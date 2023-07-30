@@ -1,25 +1,13 @@
-import mysql.connector
-
-db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'Weilemysql2004',
-}
+import sqlite3
 
 try:
-    connection = mysql.connector.connect(**db_config)
-
+    connection = sqlite3.connect('cityx.db')
     cursor = connection.cursor()
-    createDB = "CREATE DATABASE IF NOT EXISTS cityx;"
-    cursor.execute(createDB)
     print("DB Created")
-    connection.commit()
-
-    cursor.execute("USE cityx")
 
     createTable = f"""
         CREATE TABLE IF NOT EXISTS guides(
-        guideID INT PRIMARY KEY AUTO_INCREMENT,
+        guideID INTEGER PRIMARY KEY AUTOINCREMENT,
         date_created DATE NOT NULL
         );
     """
@@ -31,5 +19,5 @@ try:
     cursor.close()
     connection.close()
 
-except mysql.connector.Error as error:
+except sqlite3.Error as error:
     print("Error connecting to MySQL:", error)

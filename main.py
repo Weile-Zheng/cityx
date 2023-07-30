@@ -2,17 +2,9 @@ from functions import *
 import textwrap
 
 
-db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'Weilemysql2004',
-    'database': 'cityx'
-}
-
-
 def main():
     try:
-        connection = mysql.connector.connect(**db_config)
+        connection = sqlite3.connect('my_database.db')
         cursor = connection.cursor()
 
         createdGuideList(cursor)
@@ -41,7 +33,7 @@ def main():
                 createdGuideList(cursor)
             else:
                 break
-    except mysql.connector.Error as error:
+    except sqlite3.Error as error:
         print("Error connecting to MySQL:", error)
     finally:
         cursor.close()

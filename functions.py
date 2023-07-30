@@ -1,7 +1,7 @@
 import util
 from generator import generate
 from datetime import datetime
-import mysql.connector
+import sqlite3
 
 
 current_date = datetime.today().date()
@@ -26,7 +26,7 @@ def createdGuideList(cursor):
         rows = cursor.fetchall()
         for row in rows:
             print(row)
-    except mysql.connector.Error as error:
+    except sqlite3.connector.Error as error:
         print("\n---")
     print("")
 
