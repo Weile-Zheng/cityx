@@ -1,10 +1,18 @@
 from functions import *
 import textwrap
+from datetime import datetime
+from util import getCityInput
 
 
 def main():
+    current_date = datetime.today().date()
+    print("Current date:", current_date)
+    print("\n***Enter --help for more information***")
+    print("***Enter \"menu\" at anytime to review lists of actions available***\n")
+
     try:
-        connection = sqlite3.connect('my_database.db')
+
+        connection = sqlite3.connect('cityx.db')
         cursor = connection.cursor()
 
         createdGuideList(cursor)
@@ -24,15 +32,21 @@ def main():
         while True:
             userinput = input("->")
             if userinput.lower() == "generate":
-                createGuide(cursor)
+                city = getCityInput()
+                createGuide(cursor, util.formatCityInput(city), current_date)
+                connection.commit()
             elif userinput.lower() == "delete":
-                deleteGuide(cursor)
+                city = getCityInput()
+                deleteGuide(cursor, util.formatCityInput(city))
+                connection.commit()
             elif userinput.lower() == "view":
                 viewGuide(cursor)
             elif userinput.lower() == "showall":
                 createdGuideList(cursor)
+            elif userinput.lower() == "menu":
+                print(menu)
             else:
-                break
+                print("Unknown Action")
     except sqlite3.Error as error:
         print("Error connecting to MySQL:", error)
     finally:

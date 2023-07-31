@@ -16,4 +16,5 @@ setUp(){
    mkdir ~/cityx/userFiles
    python3 ~/exe/bin/cityx/setup.py
 }
+python3 ~/exe/bin/cityx/setup.py
 welcomeMessage

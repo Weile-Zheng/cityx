@@ -8,6 +8,7 @@ try:
     createTable = f"""
         CREATE TABLE IF NOT EXISTS guides(
         guideID INTEGER PRIMARY KEY AUTOINCREMENT,
+        city VARCHAR(60) NOT NULL, 
         date_created DATE NOT NULL
         );
     """

@@ -1,11 +1,6 @@
 import util
 from generator import generate
-from datetime import datetime
 import sqlite3
-
-
-current_date = datetime.today().date()
-print("Current date:", current_date)
 
 
 def createdGuideList(cursor):
@@ -22,21 +17,43 @@ def createdGuideList(cursor):
     Select *
     From guides
     """
+    cursor.execute(getGuide)
     try:
         rows = cursor.fetchall()
         for row in rows:
             print(row)
-    except sqlite3.connector.Error as error:
-        print("\n---")
-    print("")
+    except sqlite3.Error as error:
+        print("Error Connecting")
+    print("\n---")
 
 
-def createGuide(cursor):
-    generate()
+def createGuide(cursor, cityname, date):
+    try:
+        cursor.execute(
+            'INSERT INTO guides (city, date_created) VALUES (?, ?)', (cityname, date))
+        print("Entry successfull saved to DB")
+
+    except sqlite3.Error as error:
+        print("Error at createGuide")
+
+    generate(cityname)
 
 
-def deleteGuide(cursor):
-    print()
+def deleteGuide(cursor, cityname):
+    confirm = input(("Confirm to delete" + cityname + "? [y/n]"))
+    if confirm == "n":
+        return 0
+
+    try:
+        delete = f"""
+        DELETE FROM guides
+        WHERE city = \"{cityname}\";     
+        """
+        cursor.execute(delete)
+        print("Entry successfull deleted from DB")
+
+    except sqlite3.Error as error:
+        print("Error at deleteGuide")
 
 
 def viewGuide(cursor):
