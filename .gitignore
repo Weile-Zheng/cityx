@@ -1,4 +1,6 @@
-test.py
 cityx.db
+test.py
 testTimezone.py
 testAirport.py
+testWriteToFile.py
+testGeoCoder

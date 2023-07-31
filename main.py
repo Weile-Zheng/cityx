@@ -6,7 +6,7 @@ import textwrap
 
 def main():
     current_date = datetime.today().date()
-    print("Current date:", current_date)
+    print("Today's date:", current_date)
     print("\n***Enter --help for more information***")
     print("***Enter \"menu\" at anytime to review lists of actions available***\n")
 
@@ -40,7 +40,8 @@ def main():
                 deleteGuide(cursor, util.formatCityInput(city))
                 connection.commit()
             elif userinput.lower() == "view":
-                viewGuide(cursor)
+                city = getCityInput()
+                viewGuide(cursor, util.formatCityInput(city))
             elif userinput.lower() == "showall":
                 createdGuideList(cursor)
             elif userinput.lower() == "menu":

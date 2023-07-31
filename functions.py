@@ -1,5 +1,5 @@
 import util
-from generator import generate
+from generator import *
 import sqlite3
 
 
@@ -36,13 +36,21 @@ def createGuide(cursor, cityname, date):
     except sqlite3.Error as error:
         print("Error at createGuide")
 
-    generate(cityname)
+    generateToFile(cityname)
 
 
 def deleteGuide(cursor, cityname):
     confirm = input(("Confirm to delete" + cityname + "? [y/n]"))
     if confirm == "n":
         return 0
+
+    file = f"~/cityx/userFiles/{cityname}"
+    expanded_file_name = os.path.expanduser(file)
+    if os.path.exists(expanded_file_name):
+        os.remove(expanded_file_name)
+        print(f"The file '{expanded_file_name}' has been deleted.")
+    else:
+        print(f"The file '{expanded_file_name}' does not exist.")
 
     try:
         delete = f"""
@@ -57,5 +65,13 @@ def deleteGuide(cursor, cityname):
         print("Error at deleteGuide")
 
 
-def viewGuide(cursor):
-    print("viewGuide")
+def viewGuide(cursor, cityname):
+    file = f"~/cityx/userFiles/{cityname}"
+    expanded_file_name = os.path.expanduser(file)
+
+    if os.path.exists(expanded_file_name) == False:
+        print("File does not exist")
+    else:
+        with open(expanded_file_name, "r") as file:
+            content = file.read()
+        print(content)

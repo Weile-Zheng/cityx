@@ -1,14 +1,37 @@
 import requests
 import re
+import pytz
 from dateutil import tz
 from datetime import datetime
 
 
 def get_current_time(city):
-    cityname = f"America/{city}"
-    timezone = tz.gettz(cityname)
-    current_time = datetime.now(timezone)
+    current_time = datetime.now(getTimeZone(city))
     return current_time.strftime('%Y-%m-%d %H:%M:%S %Z')
+
+
+def getTimeZone(city):
+    '''
+    Depreciated: (For this program) No longer being use in this program for finding timezone
+
+    This function is only used in partner with get_current_time(city). Use pytzTimeZone for finding TimeZone
+    '''
+    cityname = f"America/{city}"
+    return tz.gettz(cityname)
+
+
+def pytzTimeZone(city):
+    '''
+
+    '''
+    # Pytz database use space for seperating city names.
+    city = city.replace("_", " ")
+    try:
+        # Get the time zone using the city name
+        timezone = pytz.timezone(city)
+        return timezone
+    except pytz.UnknownTimeZoneError:
+        return None
 
 
 def get_weather_info(city):
@@ -58,6 +81,11 @@ def formatLine(numberOfLines):
 
     Parameter:
     numberOfLines: Number of lines
+
+    Return:
+    lines: String of new line character 
     '''
+    lines = ""
     for i in range(numberOfLines):
-        print()
+        lines += "\n"
+    return lines

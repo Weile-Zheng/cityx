@@ -11,10 +11,10 @@ welcomeMessage(){
 
 setUp(){
    mkdir ~/cityx/profile
-   mkdir ~/cityx/profile/guideList
    mkdir ~/cityx/settings
    mkdir ~/cityx/userFiles
    python3 ~/exe/bin/cityx/setup.py
 }
+
 python3 ~/exe/bin/cityx/setup.py
 welcomeMessage
