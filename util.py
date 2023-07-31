@@ -1,11 +1,12 @@
 import requests
-import pytz
+import re
+from dateutil import tz
 from datetime import datetime
 
 
 def get_current_time(city):
     cityname = f"America/{city}"
-    timezone = pytz.timezone(cityname)
+    timezone = tz.gettz(cityname)
     current_time = datetime.now(timezone)
     return current_time.strftime('%Y-%m-%d %H:%M:%S %Z')
 
@@ -18,6 +19,23 @@ def get_weather_info(city):
         return response.text
     else:
         return f"Error: Unable to fetch weather information for {city}"
+
+
+def get_Airport(city):
+    pattern = r'.*Flamingo.*'
+    #patternFirstLine = r"^(Airport Code;Airport Name;City Name;Country Name;)"
+
+    airports = []
+
+    # Read the content of the text file line by line
+    with open('airports-code.csv', 'r') as file:
+        line = file.readline()
+        airports.append(line)
+        for line in file:
+            # Search for the pattern in each line
+            matches = re.findall(pattern, line)
+            airports.extend(matches)
+    return airports
 
 
 def getCityInput():

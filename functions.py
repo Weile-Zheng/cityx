@@ -49,6 +49,7 @@ def deleteGuide(cursor, cityname):
         DELETE FROM guides
         WHERE city = \"{cityname}\";     
         """
+
         cursor.execute(delete)
         print("Entry successfull deleted from DB")
 

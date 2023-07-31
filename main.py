@@ -1,7 +1,7 @@
 from functions import *
-import textwrap
 from datetime import datetime
 from util import getCityInput
+import textwrap
 
 
 def main():
