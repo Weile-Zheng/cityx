@@ -22,15 +22,15 @@ def get_weather_info(city):
 
 
 def get_Airport(city):
-    pattern = r'.*Flamingo.*'
-    #patternFirstLine = r"^(Airport Code;Airport Name;City Name;Country Name;)"
+    city = city.replace("_", " ")
+    pattern = fr'.*{re.escape(city)};United States'
+    # patternFirstLine = r"^(Airport Code;Airport Name;City Name;Country Name;)"
 
+    # Initialize a list to store the matches
     airports = []
 
     # Read the content of the text file line by line
     with open('airports-code.csv', 'r') as file:
-        line = file.readline()
-        airports.append(line)
         for line in file:
             # Search for the pattern in each line
             matches = re.findall(pattern, line)
@@ -50,3 +50,14 @@ def getCityInput():
 
 def formatCityInput(cityname):
     return cityname.title().replace(" ", "_")
+
+
+def formatLine(numberOfLines):
+    '''
+    Format output with empty lines printed to console
+
+    Parameter:
+    numberOfLines: Number of lines
+    '''
+    for i in range(numberOfLines):
+        print()

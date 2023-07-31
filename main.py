@@ -45,6 +45,8 @@ def main():
                 createdGuideList(cursor)
             elif userinput.lower() == "menu":
                 print(menu)
+            elif userinput.lower() == "quit":
+                break
             else:
                 print("Unknown Action")
     except sqlite3.Error as error:
