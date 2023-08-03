@@ -13,7 +13,7 @@ def generateToConsole(city):
     print(get_weather_info(city))
     airports = get_Airport(city)
     if len(airports) == 0:
-        print("No Commercial Airport at this City")
+        print("No Commercial Airportx at this City")
     print("\nCity Airports")
     print("Airport Code | Airport Name | City Name | Country Name ")
     for i in airports:
@@ -40,6 +40,7 @@ def generateToFile(city):
             else:
                 for lines in airports:
                     file.write(lines.replace(";", " | ")+"\n")
+                    file.write(getFlightLine(city))
             print(GREEN+"Guide Generated"+RESET)
     except FileExistsError:
         print(

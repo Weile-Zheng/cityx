@@ -11,17 +11,19 @@ def createdGuideList(cursor):
     Parameters:
     cursor for running the query
     """
-
     print("Created Guides: ")
     getGuide = """
-    Select *
+    Select city, date_created
     From guides
     """
     cursor.execute(getGuide)
     try:
         rows = cursor.fetchall()
+        print("City Name \t Date Created")
+        # Brute force formatting, need to find better methods i nthe future
         for row in rows:
-            print(row)
+            print(str(row).replace("(", "").replace(")",
+                  "").replace("'", "").replace(",", "\t"))
     except sqlite3.Error as error:
         print("Error Connecting")
     print("\n---")
@@ -55,7 +57,7 @@ def deleteGuide(cursor, cityname):
     try:
         delete = f"""
         DELETE FROM guides
-        WHERE city = \"{cityname}\";     
+        WHERE city = \"{cityname}\";
         """
 
         cursor.execute(delete)

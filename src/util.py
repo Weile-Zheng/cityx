@@ -61,6 +61,10 @@ def get_Airport(city):
     return airports
 
 
+def getFlightLine(city):
+    return f'https://www.cheapflights.com/flights-to-{city.replace("_","-")}/'
+
+
 def getCityInput():
     '''
     Part of Util Package

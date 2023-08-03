@@ -5,7 +5,7 @@ welcomeMessage(){
     setUp 
   fi
 
-  python3 ~/exe/bin/cityx/main.py
+  python3 ~/exe/bin/cityx/src/main.py
     
 }
 
@@ -13,8 +13,7 @@ setUp(){
    mkdir ~/cityx/profile
    mkdir ~/cityx/settings
    mkdir ~/cityx/userFiles
-   python3 ~/exe/bin/cityx/setup.py
+   python3 ~/exe/bin/cityx/src/setup.py
 }
 
-python3 ~/exe/bin/cityx/setup.py
 welcomeMessage
